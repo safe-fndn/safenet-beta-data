@@ -1,5 +1,6 @@
 [
     {
+        "identifier": 1,
         "address": "0x1111111111111111111111111111111111111111",
         "label": "Validator A",
         "commission": 0.05,
@@ -7,6 +8,7 @@
         "participation_rate_14d": 0.8523
     },
     {
+        "identifier": 2,
         "address": "0x2222222222222222222222222222222222222222",
         "label": "Validator B",
         "commission": 0.05,
@@ -14,22 +16,23 @@
         "participation_rate_14d": 0.6710
     },
     {
+        "identifier": 3,
         "address": "0x3333333333333333333333333333333333333333",
         "label": "Validator C",
         "commission": 0.05,
         "is_active": true,
         "participation_rate_14d": 0.9223
     },
-    ,
     {
+        "identifier": 4,
         "address": "0x4444444444444444444444444444444444444444",
         "label": "Validator D",
         "commission": 0.05,
         "is_active": true,
         "participation_rate_14d": 0.9012
     },
-    ,
     {
+        "identifier": 5,
         "address": "0x5555555555555555555555555555555555555555",
         "label": "Validator E",
         "commission": 0.05,
