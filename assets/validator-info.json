@@ -1,42 +1,30 @@
 [
 	{
-		"address": "0x1111111111111111111111111111111111111111",
+		"address": "0x0000f46dad1c0124004e1b6528E656ef3Bbff845",
 		"commission": 0.05,
-		"identifier": 1,
 		"is_active": true,
-		"label": "Validator A",
+		"label": "Skul",
 		"participation_rate_14d": 0.8523
 	},
 	{
-		"address": "0x2222222222222222222222222222222222222222",
+		"address": "0x202600F312dC1dC44ca46d9eF7Fd134995038fd0",
 		"commission": 0.05,
-		"identifier": 2,
-		"is_active": false,
-		"label": "Validator B",
+		"is_active": true,
+		"label": "Rese",
 		"participation_rate_14d": 0.6710
 	},
 	{
-		"address": "0x3333333333333333333333333333333333333333",
+		"address": "0x7719aB6e4233EC73c6854dD248cdfE02694a9400",
 		"commission": 0.05,
-		"identifier": 3,
 		"is_active": true,
-		"label": "Validator C",
+		"label": "Ntlm",
 		"participation_rate_14d": 0.9223
 	},
 	{
-		"address": "0x4444444444444444444444444444444444444444",
+		"address": "0xeF9afAA2a5F11e373b6f851f6AB40eC2F07bdeBd",
 		"commission": 0.05,
-		"identifier": 4,
 		"is_active": true,
-		"label": "Validator D",
+		"label": "Awow",
 		"participation_rate_14d": 0.9012
-	},
-	{
-		"address": "0x5555555555555555555555555555555555555555",
-		"commission": 0.05,
-		"identifier": 5,
-		"is_active": true,
-		"label": "Validator E",
-		"participation_rate_14d": 0.7711
 	}
 ]
