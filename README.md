@@ -8,14 +8,16 @@ Data and JSON files for Safenet Beta. Contains network stats, validator info, an
 
 ---
 
-## networks.json
+## Network Info
 
-Aggregate network-level stats for Safenet Beta.
+Aggregate network-level stats for Safenet Beta. See [`assets/network-info.json`](./assets/network-info.json) for current data.
+
+### Example
 
 ```json
 {
-  "total_staked_amount": 123123.12331221,
-  "total_transactions_checked": 88764457
+	"total_staked_amount": "123123.12331221",
+	"total_transactions_checked": 88764457
 }
 ```
 
@@ -29,9 +31,9 @@ A monotonically increasing integer counting all `TransactionProposed` events sin
 
 ---
 
-## validator_info
+## Validator Info
 
-See [`assets/safenet-validator-info.json`](./assets/safenet-validator-info.json) for current data.
+See [`assets/validator-info.json`](./assets/validator-info.json) for current data.
 
 #### `address`
 
