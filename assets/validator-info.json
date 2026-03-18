@@ -26,5 +26,12 @@
 		"is_active": true,
 		"label": "Awow",
 		"participation_rate_14d": 0.9012
+	},
+	{
+		"address": "0xfe86027AeB0EC3D80BB74Ef472F3548D6B68d1Cc",
+		"commission": 0.05,
+		"is_active": true,
+		"label": "Gman",
+		"participation_rate_14d": 0.9999
 	}
 ]
