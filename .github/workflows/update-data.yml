@@ -1,0 +1,94 @@
+# It pulls data from the chain using the safenet-staking-scripts Docker image
+# and commits updated JSON assets back to the repo.
+name: Update Safenet Data
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight UTC.
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    env:
+      IMAGE: ghcr.io/safe-research/safenet-staking-scripts:main
+      # The database file path inside the container (mounted from the host workspace).
+      DATABASE_FILE: /workspace/safenet.db
+      STAKING_RPC_URL: "https://sepolia.gateway.tenderly.co"
+      STAKING_ADDRESS: "0x4De06E355E397c863E476a055b0e7B0a6F3e3EEf"
+      STAKING_START_BLOCK: "10457652"
+      CONSENSUS_RPC_URL: "https://rpc.gnosischain.com"
+      CONSENSUS_ADDRESS: "0x21c2B6C8473051fb6dED83fE6F0609e53747Cbb4"
+      CONSENSUS_START_BLOCK: "45179570"
+      BLOCK_PAGE_SIZE: "50"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Restore the SQLite database from the previous run so that event indexing
+      # is incremental rather than starting from scratch each time.
+      - name: Restore database cache
+        uses: actions/cache@v4
+        with:
+          path: safenet.db
+          key: safenet-db-${{ github.run_id }}
+          restore-keys: safenet-db-
+
+      # Fetch and index on-chain events into the local database. This must run
+      # before any of the recording commands below.
+      - name: Index events
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/workspace" \
+            -e DATABASE_FILE \
+            -e STAKING_RPC_URL \
+            -e STAKING_ADDRESS \
+            -e STAKING_START_BLOCK \
+            -e CONSENSUS_RPC_URL \
+            -e CONSENSUS_ADDRESS \
+            -e CONSENSUS_START_BLOCK \
+            -e BLOCK_PAGE_SIZE \
+            "$IMAGE" index
+
+      # Write network totals to assets/network-info.json.
+      - name: Record totals
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/workspace" \
+            -e DATABASE_FILE \
+            -e STAKING_RPC_URL \
+            -e STAKING_ADDRESS \
+            -e STAKING_START_BLOCK \
+            -e CONSENSUS_RPC_URL \
+            -e CONSENSUS_ADDRESS \
+            -e CONSENSUS_START_BLOCK \
+            -e BLOCK_PAGE_SIZE \
+            "$IMAGE" totals --record /workspace
+
+      # Update participation rates in assets/validator-info.json.
+      - name: Record participation
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/workspace" \
+            -e DATABASE_FILE \
+            -e STAKING_RPC_URL \
+            -e STAKING_ADDRESS \
+            -e STAKING_START_BLOCK \
+            -e CONSENSUS_RPC_URL \
+            -e CONSENSUS_ADDRESS \
+            -e CONSENSUS_START_BLOCK \
+            -e BLOCK_PAGE_SIZE \
+            "$IMAGE" participation --record /workspace
+
+      # Commit any updated asset files back to the repo.
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/network-info.json assets/validator-info.json
+          git diff --staged --quiet || git commit -m "chore: update safenet data"
+          git pull --rebase origin main
+          git push
