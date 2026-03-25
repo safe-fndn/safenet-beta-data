@@ -17,13 +17,6 @@ jobs:
       IMAGE: ghcr.io/safe-research/safenet-staking-scripts:main
       # The database file path inside the container (mounted from the host workspace).
       DATABASE_FILE: /workspace/safenet.db
-      STAKING_RPC_URL: "https://sepolia.gateway.tenderly.co"
-      STAKING_ADDRESS: "0x4De06E355E397c863E476a055b0e7B0a6F3e3EEf"
-      STAKING_START_BLOCK: "10457652"
-      CONSENSUS_RPC_URL: "https://rpc.gnosischain.com"
-      CONSENSUS_ADDRESS: "0x21c2B6C8473051fb6dED83fE6F0609e53747Cbb4"
-      CONSENSUS_START_BLOCK: "45179570"
-      BLOCK_PAGE_SIZE: "50"
 
     steps:
       - uses: actions/checkout@v4
@@ -34,8 +27,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: safenet.db
-          key: safenet-db-${{ github.run_id }}
-          restore-keys: safenet-db-
+          key: safenet-db-${{ github.ref_name }}-${{ github.run_id }}
+          restore-keys: safenet-db-${{ github.ref_name }}-
 
       # Fetch and index on-chain events into the local database. This must run
       # before any of the recording commands below.
@@ -43,14 +36,8 @@ jobs:
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/workspace" \
+            --env-file "${{ github.workspace }}/config/beta.env" \
             -e DATABASE_FILE \
-            -e STAKING_RPC_URL \
-            -e STAKING_ADDRESS \
-            -e STAKING_START_BLOCK \
-            -e CONSENSUS_RPC_URL \
-            -e CONSENSUS_ADDRESS \
-            -e CONSENSUS_START_BLOCK \
-            -e BLOCK_PAGE_SIZE \
             "$IMAGE" index
 
       # Write network totals to assets/network-info.json.
@@ -58,14 +45,8 @@ jobs:
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/workspace" \
+            --env-file "${{ github.workspace }}/config/beta.env" \
             -e DATABASE_FILE \
-            -e STAKING_RPC_URL \
-            -e STAKING_ADDRESS \
-            -e STAKING_START_BLOCK \
-            -e CONSENSUS_RPC_URL \
-            -e CONSENSUS_ADDRESS \
-            -e CONSENSUS_START_BLOCK \
-            -e BLOCK_PAGE_SIZE \
             "$IMAGE" totals --record /workspace
 
       # Update participation rates in assets/validator-info.json.
@@ -73,14 +54,8 @@ jobs:
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/workspace" \
+            --env-file "${{ github.workspace }}/config/beta.env" \
             -e DATABASE_FILE \
-            -e STAKING_RPC_URL \
-            -e STAKING_ADDRESS \
-            -e STAKING_START_BLOCK \
-            -e CONSENSUS_RPC_URL \
-            -e CONSENSUS_ADDRESS \
-            -e CONSENSUS_START_BLOCK \
-            -e BLOCK_PAGE_SIZE \
             "$IMAGE" participation --record /workspace
 
       # Commit any updated asset files back to the repo.
