@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: read
 
     env:
       IMAGE: ghcr.io/safe-fndn/safenet-staking-scripts:main
