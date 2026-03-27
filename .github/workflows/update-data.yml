@@ -14,7 +14,7 @@ jobs:
       contents: write
 
     env:
-      IMAGE: ghcr.io/safe-research/safenet-staking-scripts:main
+      IMAGE: ghcr.io/safe-fndn/safenet-staking-scripts:main
       # The database file path inside the container (mounted from the host workspace).
       DATABASE_FILE: /workspace/safenet.db
 
