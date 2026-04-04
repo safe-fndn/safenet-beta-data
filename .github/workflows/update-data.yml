@@ -60,11 +60,14 @@ jobs:
       # Update participation rates in assets/validator-info.json.
       - name: Record participation
         run: |
+          end="$(date -d "$(date \'+%H:00:00\')" +%s)"
+          start="$((end - 1209600))"
+          echo "computing participation for: $(date -d @$start) - $(date -d @$end)"
           docker run --rm \
             -v "${{ github.workspace }}:/workspace" \
             --env-file "${{ github.workspace }}/config/beta.env" \
             -e DATABASE_FILE \
-            "$IMAGE" participation --record /workspace
+            "$IMAGE" participation --record /workspace --rewardPeriodStart "$start" --rewardPeriodEnd "$end"
 
       # Commit any updated asset files back to the repo.
       - name: Commit changes
