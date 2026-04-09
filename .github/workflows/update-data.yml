@@ -35,7 +35,7 @@ jobs:
         with:
           path: safenet.${{ github.event.inputs.network || 'beta' }}.db
           key: safenet-${{ github.event.inputs.network || 'beta' }}-db-${{ github.run_id }}
-          restore-keys: safenet-db-${{ github.event.inputs.network || 'beta' }}-
+          restore-keys: safenet-${{ github.event.inputs.network || 'beta' }}-db-
 
       - uses: docker/login-action@v3
         with:
