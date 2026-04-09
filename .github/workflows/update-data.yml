@@ -6,6 +6,13 @@ on:
   schedule:
     - cron: '0 */3 * * *'  # Daily at midnight and every 3h
   workflow_dispatch:
+    inputs:
+      network:
+        type: choice
+        description: Safenet network to update
+        options: 
+          - beta
+          - devnet
 
 jobs:
   update:
@@ -16,23 +23,21 @@ jobs:
 
     env:
       IMAGE: ghcr.io/safe-fndn/safenet-staking-scripts:main
-      # The database file path inside the container (mounted from the host workspace).
-      DATABASE_FILE: /workspace/safenet.db
+      DATABASE_FILE: /workspace/safenet.${{ github.event.inputs.network || 'beta' }}.db
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       # Restore the SQLite database from the previous run so that event indexing
       # is incremental rather than starting from scratch each time.
-      - name: Restore database cache
+      - name: Safenet Database Cache
         uses: actions/cache@v4
         with:
-          path: safenet.db
-          key: safenet-db-${{ github.ref_name }}-${{ github.run_id }}
-          restore-keys: safenet-db-${{ github.ref_name }}-
+          path: safenet.${{ github.event.inputs.network || 'beta' }}.db
+          key: safenet-${{ github.event.inputs.network || 'beta' }}-db-${{ github.run_id }}
+          restore-keys: safenet-db-${{ github.event.inputs.network || 'beta' }}-
 
-      - name: Log in to GHCR
-        uses: docker/login-action@v3
+      - uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -40,25 +45,27 @@ jobs:
 
       # Fetch and index on-chain events into the local database. This must run
       # before any of the recording commands below.
-      - name: Index events
+      - name: Index Events
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/workspace" \
             --env-file "${{ github.workspace }}/config/beta.env" \
             -e DATABASE_FILE \
-            "$IMAGE" index
+            "$IMAGE" \
+            index
 
       # Write network totals to assets/network-info.json.
-      - name: Record totals
+      - name: Record Totals
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/workspace" \
             --env-file "${{ github.workspace }}/config/beta.env" \
             -e DATABASE_FILE \
-            "$IMAGE" totals --record /workspace
+            "$IMAGE" \
+            totals --record /workspace
 
       # Update participation rates in assets/validator-info.json.
-      - name: Record participation
+      - name: Record Participation
         run: |
           end="$(date -d "$(date '+%H:00:00')" '+%s')"
           start="$((end - 1209600))"
@@ -67,15 +74,19 @@ jobs:
             -v "${{ github.workspace }}:/workspace" \
             --env-file "${{ github.workspace }}/config/beta.env" \
             -e DATABASE_FILE \
-            "$IMAGE" participation --record /workspace --rewardPeriodStart "$start" --rewardPeriodEnd "$end"
+            "$IMAGE" \
+            participation --record /workspace --rewardPeriodStart "$start" --rewardPeriodEnd "$end"
 
-      # Commit any updated asset files back to the repo.
-      - name: Commit changes
+      # Commit any updated asset files back to the repo. Only run when updating
+      # assets on the correct branch. This allows us to test workflows on PR
+      # branches with cache and without unexpected update errors.
+      - name: Commit Changes
+        if: ${{ (github.ref_name == 'main' && (github.event.inputs.network || 'beta') == 'beta') || (github.ref_name == 'devnet' && github.event.inputs.network == 'devnet') }}
         run: |
           make fix
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add assets/network-info.json assets/validator-info.json
           git diff --staged --quiet || git commit -m "chore: update safenet data"
-          git pull --rebase origin main
+          git pull --rebase origin ${{ github.ref_name }}
           git push
