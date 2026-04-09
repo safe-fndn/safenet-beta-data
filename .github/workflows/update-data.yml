@@ -52,6 +52,7 @@ jobs:
             -v "${{ github.workspace }}:/workspace" \
             --env-file "$ENV_FILE" \
             -e DATABASE_FILE \
+            -e DEBUG='safenet,safenet:*' \
             "$IMAGE" \
             index
 
