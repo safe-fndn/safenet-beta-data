@@ -23,6 +23,7 @@ jobs:
 
     env:
       IMAGE: ghcr.io/safe-fndn/safenet-staking-scripts:main
+      ENV_FILE: config/${{ github.event.inputs.network || 'beta' }}.env
       DATABASE_FILE: /workspace/safenet.${{ github.event.inputs.network || 'beta' }}.db
 
     steps:
@@ -49,7 +50,7 @@ jobs:
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/workspace" \
-            --env-file "${{ github.workspace }}/config/beta.env" \
+            --env-file "$ENV_FILE" \
             -e DATABASE_FILE \
             "$IMAGE" \
             index
@@ -59,7 +60,7 @@ jobs:
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/workspace" \
-            --env-file "${{ github.workspace }}/config/beta.env" \
+            --env-file "$ENV_FILE" \
             -e DATABASE_FILE \
             "$IMAGE" \
             totals --record /workspace
@@ -72,7 +73,7 @@ jobs:
           echo "computing participation for: $(date -d @$start) - $(date -d @$end)"
           docker run --rm \
             -v "${{ github.workspace }}:/workspace" \
-            --env-file "${{ github.workspace }}/config/beta.env" \
+            --env-file "$ENV_FILE" \
             -e DATABASE_FILE \
             "$IMAGE" \
             participation --record /workspace --rewardPeriodStart "$start" --rewardPeriodEnd "$end"
