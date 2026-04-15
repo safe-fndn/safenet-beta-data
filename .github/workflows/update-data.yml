@@ -17,8 +17,9 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    environment: data-update-main
     permissions:
-      contents: write
+      contents: read
       packages: read
 
     env:
@@ -28,6 +29,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+        with:
+          ssh-key: ${{ secrets.DATA_BOT_SSH_KEY }}
 
       # Restore the SQLite database from the previous run so that event indexing
       # is incremental rather than starting from scratch each time.
