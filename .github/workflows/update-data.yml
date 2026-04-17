@@ -18,9 +18,6 @@ jobs:
   update:
     runs-on: ubuntu-latest
     environment: data-update-main
-    permissions:
-      contents: read
-      packages: read
 
     env:
       IMAGE: ghcr.io/safe-fndn/safenet-staking-scripts:main
@@ -40,12 +37,6 @@ jobs:
           path: safenet.${{ github.event.inputs.network || 'beta' }}.db
           key: safenet-${{ github.event.inputs.network || 'beta' }}-db-${{ github.run_id }}
           restore-keys: safenet-${{ github.event.inputs.network || 'beta' }}-db-
-
-      - uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
 
       # Fetch and index on-chain events into the local database. This must run
       # before any of the recording commands below.
