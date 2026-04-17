@@ -17,7 +17,7 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
-    environment: data-update-main
+    environment: ${{ github.ref_name == 'main' && 'data-update-main' || null }}
 
     env:
       IMAGE: ghcr.io/safe-fndn/safenet-staking-scripts:main
