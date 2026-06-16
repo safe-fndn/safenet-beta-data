@@ -1,8 +1,8 @@
 {
 	"epoch": 0,
-	"merkleRoot": "0x8046d1df9d339a0f78d871028adcb20ae5ddbf95602ea5e10f7eb04faa46036c",
-	"rewardsUntil": "2026-06-02T00:00:00.000Z",
-	"tokenTotal": "1384607513638846792033199",
-	"unpaidAmount": "21741442502344377313",
-	"updatedAt": "2026-06-02T11:51:22.349Z"
+	"merkleRoot": "0xa0b886872e438e06dbf343697ffb582d387f69947ce2395209d42b042e237f40",
+	"rewardsUntil": "2026-06-16T00:00:00.000Z",
+	"tokenTotal": "1730761522476475173379794",
+	"unpaidAmount": "7708292755595850975",
+	"updatedAt": "2026-06-16T10:48:13.335Z"
 }
