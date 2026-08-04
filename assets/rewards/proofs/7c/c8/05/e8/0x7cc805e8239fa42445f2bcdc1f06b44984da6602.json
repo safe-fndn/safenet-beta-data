@@ -1,7 +1,7 @@
 {
 	"cumulativeAmount": "68226727305743399827120",
-	"kycAmount": "0",
 	"kyc": true,
+	"kycAmount": "0",
 	"merkleRoot": "0x0b33b0fe9db7c954023aa92160d1a4117193955e09148f115ac716783917137a",
 	"proof": [
 		"0x67756c388b5e0e508727790de845300cb3ec79a12a9d89a42c2c0dddd2b0d08d",
