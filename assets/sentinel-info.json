@@ -1,16 +1,20 @@
 [
 	{
 		"address": "0x0000f46dad1c0124004e1b6528E656ef3Bbff845",
-		"commission": 0.05,
 		"is_active": true,
 		"label": "Skul",
 		"participation_rate_14d": 0.8523
 	},
 	{
 		"address": "0x202600F312dC1dC44ca46d9eF7Fd134995038fd0",
-		"commission": 0.05,
 		"is_active": true,
 		"label": "Rese",
 		"participation_rate_14d": 0.6710
+	},
+	{
+		"address": "0xfc0233Bc3e33d58C0a8A40F19eFcF0e04dd55622",
+		"is_active": true,
+		"label": "Spek",
+		"participation_rate_14d": 0.9999
 	}
 ]
