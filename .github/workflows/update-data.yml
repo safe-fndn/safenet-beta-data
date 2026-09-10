@@ -20,7 +20,7 @@ jobs:
     environment: ${{ github.ref_name == 'main' && 'data-update-main' || null }}
 
     env:
-      IMAGE: ghcr.io/safe-fndn/safenet-staking-scripts:main
+      IMAGE: ghcr.io/safe-fndn/safenet-staking-scripts:beta
       ENV_FILE: config/${{ github.event.inputs.network || 'beta' }}.env
       DATABASE_FILE: /workspace/safenet.${{ github.event.inputs.network || 'beta' }}.db
 
