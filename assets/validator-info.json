@@ -4,14 +4,14 @@
 		"commission": 0.05,
 		"is_active": true,
 		"label": "Gnosis",
-		"participation_rate_14d": 0.9696059624516494
+		"participation_rate_14d": 0.9696279303626422
 	},
 	{
 		"address": "0x7B0A8EFA45dE81F11F2846EC28259B62155a2b37",
 		"commission": 0.05,
 		"is_active": true,
 		"label": "Greenfield",
-		"participation_rate_14d": 0.9897795528161263
+		"participation_rate_14d": 0.9897083778518007
 	},
 	{
 		"address": "0xb0E735D4a3b70195420E0ae933689A55750CFcd2",
@@ -25,20 +25,20 @@
 		"commission": 0.05,
 		"is_active": true,
 		"label": "Core Contributors",
-		"participation_rate_14d": 0.9994024969338658
+		"participation_rate_14d": 0.9994029287914021
 	},
 	{
 		"address": "0xD8997c2a94052C4FB79B53b3e255c1F07c99305B",
 		"commission": 0.05,
 		"is_active": true,
 		"label": "Blockchain Capital",
-		"participation_rate_14d": 0.9902040944683795
+		"participation_rate_14d": 0.989849789453837
 	},
 	{
 		"address": "0xF6EA21D702983c443f58A267265912FE03D2FF0b",
 		"commission": 0.05,
 		"is_active": true,
 		"label": "Safe Labs",
-		"participation_rate_14d": 0.9973426837321928
+		"participation_rate_14d": 0.997266042360631
 	}
 ]
