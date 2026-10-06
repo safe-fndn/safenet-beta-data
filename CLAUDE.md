@@ -16,7 +16,7 @@ This repo stores and serves JSON data for Safenet Beta, Safenet Aegis, and poten
 
 - **Never break existing JSON schemas.** Consumers depend on field names and types being stable. Adding new optional fields is fine; removing or renaming fields is a breaking change.
 - **Validate JSON before committing.** All JSON files must be valid and well-formed. Use `python3 -m json.tool <file>` or `jq . <file>` to verify.
-- **Numbers, not strings, for numeric values.** `total_staked_amount` and similar fields must remain JSON numbers, not quoted strings.
+- **Keep numeric types stable.** Numeric fields are JSON numbers, except `total_staked_amount`, which is a decimal string so all 18 decimal places stay exact. Do not convert between the two.
 - **Monotonic counters must never decrease.** `total_transactions_checked` only goes up; never write a lower value than what is already present.
 - **Preserve decimal precision.** `total_staked_amount` supports up to 18 decimal places; do not round unless explicitly instructed.
 
@@ -30,7 +30,7 @@ This repo stores and serves JSON data for Safenet Beta, Safenet Aegis, and poten
 | Data | Contract | Network |
 |------|----------|---------|
 | `total_staked_amount` | [`0x115E78f160e1E3eF163B05C84562Fa16fA338509`](https://etherscan.io/address/0x115E78f160e1E3eF163B05C84562Fa16fA338509#code) | Ethereum mainnet |
-| `total_transactions_checked` | Consensus contract (not yet deployed) | TBD |
+| `total_transactions_checked` | [`0x223624cBF099e5a8f8cD5aF22aFa424a1d1acEE9`](https://gnosisscan.io/address/0x223624cBF099e5a8f8cD5aF22aFa424a1d1acEE9) (Safenet Beta) | Gnosis Chain |
 
 ## Commit hygiene
 

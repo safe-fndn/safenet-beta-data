@@ -21,11 +21,11 @@ Aggregate network-level stats for Safenet Beta. See [`assets/network-info.json`]
 
 #### `total_staked_amount`
 
-Total SAFE tokens currently staked, as a number with up to 18 decimal places. Sourced from the staking contract at [`0x115E78f160e1E3eF163B05C84562Fa16fA338509`](https://etherscan.io/address/0x115E78f160e1E3eF163B05C84562Fa16fA338509#code) on Ethereum mainnet.
+Total SAFE tokens currently staked, as a decimal string with up to 18 decimal places (a string so precision is preserved). Sourced from the staking contract at [`0x115E78f160e1E3eF163B05C84562Fa16fA338509`](https://etherscan.io/address/0x115E78f160e1E3eF163B05C84562Fa16fA338509#code) on Ethereum mainnet.
 
 #### `total_transactions_checked`
 
-A monotonically increasing integer counting all `TransactionProposed` events since inception. Sourced from the consensus contract (not yet deployed).
+A monotonically increasing integer counting all `TransactionProposed` events since inception. Sourced from the consensus contract. For Safenet Beta, this is [`0x223624cBF099e5a8f8cD5aF22aFa424a1d1acEE9`](https://gnosisscan.io/address/0x223624cBF099e5a8f8cD5aF22aFa424a1d1acEE9) on Gnosis Chain.
 
 ---
 
