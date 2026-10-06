@@ -25,7 +25,7 @@ Total SAFE tokens currently staked, as a decimal string with up to 18 decimal pl
 
 #### `total_transactions_checked`
 
-A monotonically increasing integer counting all `TransactionProposed` events since inception. Sourced from the consensus contract. For Safenet Beta, this is [`0x223624cBF099e5a8f8cD5aF22aFa424a1d1acEE9`](https://gnosisscan.io/address/0x223624cBF099e5a8f8cD5aF22aFa424a1d1acEE9) on Gnosis Chain.
+A monotonically increasing integer counting all `TransactionProposed` events on the consensus contract of a Safenet version since its deployment. Counts are per version and not aggregated across versions. For Safenet Beta, this is [`0x223624cBF099e5a8f8cD5aF22aFa424a1d1acEE9`](https://gnosisscan.io/address/0x223624cBF099e5a8f8cD5aF22aFa424a1d1acEE9) on Gnosis Chain.
 
 ---
 

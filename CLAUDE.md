@@ -17,7 +17,7 @@ This repo stores and serves JSON data for Safenet Beta, Safenet Aegis, and poten
 - **Never break existing JSON schemas.** Consumers depend on field names and types being stable. Adding new optional fields is fine; removing or renaming fields is a breaking change.
 - **Validate JSON before committing.** All JSON files must be valid and well-formed. Use `python3 -m json.tool <file>` or `jq . <file>` to verify.
 - **Keep numeric types stable.** Never change a field between JSON number and string. `total_staked_amount` is a decimal string with up to 18 decimal places, and token amounts in `assets/rewards/` are integer strings, so large values stay exact. Other numeric fields, such as `total_transactions_checked`, `commission` and `participation_rate_14d`, are JSON numbers.
-- **Monotonic counters must never decrease.** `total_transactions_checked` only goes up; never write a lower value than what is already present.
+- **Monotonic counters must never decrease.** `total_transactions_checked` only goes up within a Safenet version; never write a lower value than what is already present for that version.
 - **Preserve decimal precision.** `total_staked_amount` supports up to 18 decimal places; do not round unless explicitly instructed.
 
 ## Update cadence
