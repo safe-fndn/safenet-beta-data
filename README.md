@@ -2,7 +2,7 @@
 
 Data and JSON files for Safenet Beta, Safenet Aegis, and potentially future Safenet versions. Contains network stats, validator info, and rewards distribution data.
 
-> **Auto-updates:** `assets/network-info.json` and `assets/validator-info.json` are updated automatically every 3h. Rewards data is updated manually, on a regular basis, if SafeDAO approves proposal for rewards distribution.
+> **Auto-updates:** `assets/network-info.json` and the `participation_rate_14d` field in `assets/validator-info.json` are updated automatically every 3h. All other validator details are edited manually. Rewards data is updated manually, on a regular basis, if SafeDAO approves proposal for rewards distribution.
 
 ---
 

@@ -22,7 +22,8 @@ This repo stores and serves JSON data for Safenet Beta, Safenet Aegis, and poten
 
 ## Update cadence
 
-- `assets/network-info.json` and `assets/validator-info.json` — auto-updated every 3h by the `Update Safenet Data` workflow (`.github/workflows/update-data.yml`).
+- `assets/network-info.json` — auto-updated every 3h by the `Update Safenet Data` workflow (`.github/workflows/update-data.yml`).
+- `assets/validator-info.json` — only `participation_rate_14d` is auto-updated by the same workflow. `label`, `commission` and `is_active` are edited manually. New validators are added by the workflow with only `address` and `participation_rate_14d`; fill in the remaining fields manually.
 - `assets/rewards/` — updated manually, following an approved SafeDAO rewards distribution proposal only.
 
 ## On-chain sources
