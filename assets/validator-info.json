@@ -30,7 +30,7 @@
 	{
 		"address": "0xD8997c2a94052C4FB79B53b3e255c1F07c99305B",
 		"commission": 0.05,
-		"is_active": true,
+		"is_active": false,
 		"label": "Blockchain Capital",
 		"participation_rate_14d": 0.9882032824151411
 	},
