@@ -1,10 +1,8 @@
-# safenet-beta-data
+# safenet-data
 
-Data and JSON files for Safenet Beta. Contains network stats, validator info, and rewards distribution data.
+Data and JSON files for Safenet Beta, Safenet Aegis, and potentially future Safenet versions. Contains network stats, validator info, and rewards distribution data.
 
-> **Pre-launch:** This repo currently contains test data only.
-
-> **Auto-updates:** Automated updates have not been fully implemented yet. Once live, `networks.json` and `validator_info` will be updated automatically. Rewards data is updated manually, on a regular basis, if SafeDAO approves proposal for rewards distribution.
+> **Auto-updates:** `assets/network-info.json` and `assets/validator-info.json` are updated automatically every 3h. Rewards data is updated manually, on a regular basis, if SafeDAO approves proposal for rewards distribution.
 
 ---
 

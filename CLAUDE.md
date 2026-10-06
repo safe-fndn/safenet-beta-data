@@ -1,16 +1,16 @@
-# CLAUDE.md — safenet-beta-data
+# CLAUDE.md — safenet-data
 
 Guidelines for working on this repository with Claude.
 
 ## Repository purpose
 
-This repo stores and serves JSON data for Safenet Beta: network-level stats, validator info, and rewards distribution data. It is consumed by frontends and other tooling that rely on stable file paths and predictable schemas.
+This repo stores and serves JSON data for Safenet Beta, Safenet Aegis, and potentially future Safenet versions: network-level stats, validator info, and rewards distribution data. It is consumed by frontends and other tooling that rely on stable file paths and predictable schemas.
 
 ## Key files
 
-- `networks.json` — aggregate network stats (staked SAFE, total transactions checked)
-- `assets/safenet-validator-info.json` — per-validator data
-- `rewards/` — merkle proofs and distribution data for SafeDAO-approved rewards proposals
+- `assets/network-info.json` — aggregate network stats (staked SAFE, total transactions checked)
+- `assets/validator-info.json` — per-validator data
+- `assets/rewards/` — merkle proofs and distribution data for SafeDAO-approved rewards proposals
 
 ## Data integrity rules
 
@@ -22,12 +22,8 @@ This repo stores and serves JSON data for Safenet Beta: network-level stats, val
 
 ## Update cadence
 
-- `networks.json` and `validator_info` — will be auto-updated once automation is in place (not yet implemented).
-- `rewards/` — updated manually, following an approved SafeDAO rewards distribution proposal only.
-
-## Pre-launch note
-
-Until the official Safenet Beta launch, all data in this repo is test data. Do not treat any values as production figures.
+- `assets/network-info.json` and `assets/validator-info.json` — auto-updated every 3h by the `Update Safenet Data` workflow (`.github/workflows/update-data.yml`).
+- `assets/rewards/` — updated manually, following an approved SafeDAO rewards distribution proposal only.
 
 ## On-chain sources
 
@@ -39,5 +35,5 @@ Until the official Safenet Beta launch, all data in this repo is test data. Do n
 ## Commit hygiene
 
 - Keep commits focused: one logical change per commit.
-- Commit messages should state what changed and why (e.g. `chore: update networks.json with latest staking snapshot`).
+- Commit messages should state what changed and why (e.g. `chore: update network-info.json with latest staking snapshot`).
 - Do not commit secrets, private keys, or internal infrastructure URLs.
