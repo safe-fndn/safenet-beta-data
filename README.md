@@ -1,10 +1,8 @@
-# safenet-beta-data
+# safenet-data
 
-Data and JSON files for Safenet Beta. Contains network stats, validator info, and rewards distribution data.
+Data and JSON files for Safenet Beta, Safenet Aegis, and potentially future Safenet versions. Contains network stats, validator info, and rewards distribution data.
 
-> **Pre-launch:** This repo currently contains test data only.
-
-> **Auto-updates:** Automated updates have not been fully implemented yet. Once live, `networks.json` and `validator_info` will be updated automatically. Rewards data is updated manually, on a regular basis, if SafeDAO approves proposal for rewards distribution.
+> **Auto-updates:** `assets/network-info.json` and the `participation_rate_14d` field in `assets/validator-info.json` are updated automatically every 3h. All other validator details are edited manually. Rewards data is updated manually, on a regular basis, if SafeDAO approves proposal for rewards distribution.
 
 ---
 
@@ -23,11 +21,11 @@ Aggregate network-level stats for Safenet Beta. See [`assets/network-info.json`]
 
 #### `total_staked_amount`
 
-Total SAFE tokens currently staked, as a number with up to 18 decimal places. Sourced from the staking contract at [`0x115E78f160e1E3eF163B05C84562Fa16fA338509`](https://etherscan.io/address/0x115E78f160e1E3eF163B05C84562Fa16fA338509#code) on Ethereum mainnet.
+Total SAFE tokens currently staked, as a decimal string with up to 18 decimal places (a string so precision is preserved). Sourced from the staking contract at [`0x115E78f160e1E3eF163B05C84562Fa16fA338509`](https://etherscan.io/address/0x115E78f160e1E3eF163B05C84562Fa16fA338509#code) on Ethereum mainnet.
 
 #### `total_transactions_checked`
 
-A monotonically increasing integer counting all `TransactionProposed` events since inception. Sourced from the consensus contract (not yet deployed).
+A monotonically increasing integer counting all `TransactionProposed` events on the consensus contract of a Safenet version since its deployment. Counts are per version and not aggregated across versions. For Safenet Beta, this is [`0x223624cBF099e5a8f8cD5aF22aFa424a1d1acEE9`](https://gnosisscan.io/address/0x223624cBF099e5a8f8cD5aF22aFa424a1d1acEE9) on Gnosis Chain.
 
 ---
 
